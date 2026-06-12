@@ -1,13 +1,15 @@
 name: release
 
-# Token-free release via the standard Changesets PR flow — mirrors the
-# xfcfam/lib-npm monorepo.
+# Solo, token-free publish — no PR flow (this repo is maintained by one
+# person and is not collaborative).
 #
-# On a push to `main` that carries pending changesets, the Changesets action
-# opens (or updates) a "Version Packages" PR — using the built-in GITHUB_TOKEN,
-# no PAT. Merging that PR lands the version bump + CHANGELOG on `main` through
-# the normal protected-branch PR flow. The merge re-triggers this workflow,
-# which now finds no pending changesets and runs `changeset publish`.
+# The maintainer versions locally and pushes to `main`:
+#   pnpm changeset            # (optional) describe the change for the CHANGELOG
+#   pnpm changeset version    # bump package.json + CHANGELOG
+#   git commit -am "release" && git push
+#
+# On that push, this workflow builds and runs `changeset publish`, which
+# publishes the package only when its local version is ahead of npm.
 #
 # npm auth is **trusted publishing (OIDC)** — NO npm token. The job's
 # `id-token: write` + the package's Trusted Publisher config (org `xfcfam`,
@@ -15,11 +17,9 @@ name: release
 # this run. Provenance attestations are generated automatically.
 #
 # Required configuration:
-#   - Settings → Actions → General → "Allow GitHub Actions to create and
-#     approve pull requests" (so the action can open the Version PR).
 #   - A GitHub Environment `release`, restricted to `main`.
 #   - The package's Trusted Publisher on npmjs.com (environment `release`).
-#   - (First publish only) bootstrap @xfcfam/xftools manually once, since a
+#   - (First publish only) bootstrap @xfcfam/tools manually once, since a
 #     brand-new package name cannot be created by an OIDC publish.
 
 on:
@@ -29,8 +29,7 @@ on:
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
   id-token: write
 
 jobs:
@@ -41,8 +40,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
 
       - name: Set up pnpm
         uses: pnpm/action-setup@v6
@@ -63,13 +60,9 @@ jobs:
         # `pnpm changeset publish` calls npm under the hood, so upgrade it.
         run: npm install -g npm@latest
 
-      - name: Create Release PR or Publish
-        uses: changesets/action@v1
-        with:
-          version: pnpm version-packages
-          publish: pnpm release
-          commit: "chore(release): version packages"
-          title: "chore(release): version packages"
+      - name: Publish
+        # `pnpm release` = build + changeset publish. Publishes only when the
+        # local version is ahead of npm; otherwise it is a no-op.
+        run: pnpm release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_CONFIG_PROVENANCE: "true"

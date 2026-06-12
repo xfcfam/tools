@@ -2,15 +2,16 @@
 
 This folder is managed by [Changesets](https://github.com/changesets/changesets).
 
-Add a changeset for any change that alters the published `@xfcfam/xftools`
-package:
+`@xfcfam/tools` is maintained solo and published straight from `main` — there
+is **no PR flow**. To cut a release:
 
 ```bash
-pnpm changeset
+pnpm changeset          # (optional) describe the change for the CHANGELOG
+pnpm changeset version  # apply pending changesets → bump + CHANGELOG
+git commit -am "release" && git push   # push to main → CI publishes via OIDC
 ```
 
-Pick the bump type (`patch` / `minor` / `major`) and write a one-line summary
-for users. Commit the generated `.changeset/*.md` with your PR. Merging a PR
-that carries a changeset opens the **Version Packages** PR; merging that
-publishes to npm via OIDC. See `RELEASING.md` for the full flow (identical to
-the `xfcfam/lib-npm` monorepo).
+The `release` workflow runs `changeset publish` on every push to `main` and
+publishes the package only when its local version is ahead of npm — token-free
+(OIDC trusted publishing). It shares the toolchain and OIDC setup with the
+`xfcfam/lib-npm` monorepo, but not its collaborative Version-Packages PR flow.

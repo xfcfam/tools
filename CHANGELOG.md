@@ -1,4 +1,4 @@
-# `@xfcfam/xftools`
+# `@xfcfam/tools`
 
 ## Unreleased — Catalog alignment with XF-CFAM-001:2026
 

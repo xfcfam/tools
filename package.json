@@ -1,5 +1,5 @@
 {
-  "name": "@xfcfam/xftools",
+  "name": "@xfcfam/tools",
   "version": "0.1.0",
   "description": "Validator and toolkit for the XF Architecture Model. Built as an XF artefact — validates itself.",
   "author": "XF Contributors",

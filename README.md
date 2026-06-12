@@ -1,4 +1,4 @@
-# `@xfcfam/xftools`
+# `@xfcfam/tools`
 
 CLI validator for the **XF / CFAM Architecture Model**. Given a project
 root, it classifies every source file into the XF L × T matrix
@@ -66,31 +66,24 @@ constructs that don't exist in every language (e.g.
 declare an `appliesTo` set; the rule engine consults it before
 running them.
 
-## Install & run
+## Install
 
 ```bash
-pnpm install
-pnpm build
-node dist/main.js validate <path>
+npm i -g @xfcfam/tools
 ```
 
-For development (skip the build step):
+This installs the `xftools` command globally. Run it against any XF
+artefact:
 
 ```bash
-pnpm run validate <path>
-```
-
-`<path>` must point to an XF artefact: a directory that contains
-`./src/` plus a manifest file at the root.
-
-### CLI
-
-```
 xftools validate <path> [--json]
 ```
 
-`--json` switches the output to a structured JSON document instead of
-the human-readable console format.
+`<path>` must point to an XF artefact: a directory that contains `./src/`
+plus a manifest file at the root. `--json` switches the output to a
+structured JSON document instead of the human-readable console format.
+
+> One-off, without a global install: `npx @xfcfam/tools validate <path>`.
 
 ### Example output
 
@@ -220,6 +213,11 @@ but always returns no violation).
 
 For the per-group prose with applicability notes, see
 **[RULES.md](./RULES.md)**.
+
+## Documentation
+
+The full XF / CFAM specification and ecosystem live at
+**[xfcfam.org](https://xfcfam.org)**.
 
 ## License
 
