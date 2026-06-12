@@ -33,7 +33,7 @@
     "clean": "rm -rf dist",
     "test": "vitest run",
     "test:watch": "vitest",
-    "validate": "tsx src/main.ts validate",
+    "validate": "tsx main.ts validate",
     "link": "pnpm build && pnpm link --global",
     "unlink": "pnpm unlink --global",
     "changeset": "changeset",
