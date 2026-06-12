@@ -10,3 +10,8 @@ minimumReleaseAgeExclude:
 overrides:
   vite: '>=6.4.2'
   esbuild: '>=0.24.3'
+  # lodash / lodash-es: pull patched 4.18.x (via java-parser → chevrotain).
+  # Fixes CVE-2025-13465 (_.unset/_.omit prototype pollution) and
+  # CVE-2026-4800 (_.template code injection); both patched in 4.18.0.
+  lodash: '>=4.18.0'
+  lodash-es: '>=4.18.0'
