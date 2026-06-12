@@ -1,6 +1,7 @@
 import { StatelessRepository } from '@xfcfam/xf'
 import { promises as fs } from 'node:fs'
-import { join, relative, sep } from 'node:path'
+import { join, relative, sep, dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import type { FileSystemEntry } from '../transfers/FileSystemEntry.js'
 
 /**
@@ -26,6 +27,29 @@ export class FileSystemRepository extends StatelessRepository {
   /** Read a file as UTF-8 text. */
   async readFile(path: string): Promise<string> {
     return fs.readFile(path, 'utf-8')
+  }
+
+  /**
+   * Read the version of xftools itself, from the package manifest that
+   * sits above this compiled module. Walks up from the module location
+   * until a `package.json` carrying a `version` is found; returns
+   * `'unknown'` if none is reachable.
+   */
+  async toolVersion(): Promise<string> {
+    let dir = dirname(fileURLToPath(import.meta.url))
+    for (let depth = 0; depth < 6; depth++) {
+      try {
+        const text = await fs.readFile(join(dir, 'package.json'), 'utf-8')
+        const version = (JSON.parse(text) as { version?: unknown }).version
+        if (typeof version === 'string') return version
+      } catch {
+        // No manifest at this level — keep walking up.
+      }
+      const parent = dirname(dir)
+      if (parent === dir) break
+      dir = parent
+    }
+    return 'unknown'
   }
 
   /**

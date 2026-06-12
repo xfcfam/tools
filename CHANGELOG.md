@@ -1,5 +1,15 @@
 # `@xfcfam/tools`
 
+## 0.1.2
+
+### Patch Changes
+
+- CLI: add `-v` / `--version` (prints the xftools version, the rule-catalog
+  edition `XF-CFAM-001:2026`, and the specification URL) and expand
+  `-h` / `--help` into a commands listing. Catalog metadata is now centralised
+  in `SpecUtils`, and the tool version is read from the package manifest via
+  the Access layer. Documented the command set in the README.
+
 ## 0.1.1
 
 ### Patch Changes

@@ -85,6 +85,24 @@ structured JSON document instead of the human-readable console format.
 
 > One-off, without a global install: `npx @xfcfam/tools validate <path>`.
 
+## Commands
+
+| Command | What it does |
+| --- | --- |
+| `xftools validate <path> [--json]` | Validate that the XF artefact at `<path>` conforms to the model. Classifies every component, runs the rule catalog, and prints a conformance level `Λ ∈ {0..4}`. `--json` emits a structured report instead of console text. Exit code `0` if `Λ ≥ 3`, `1` if `Λ < 3`, `2` on usage / runtime errors. |
+| `xftools -v`, `xftools --version` | Print the installed xftools version, the rule-catalog edition it validates against (`XF-CFAM-001:2026`), and the link to the specification. |
+| `xftools -h`, `xftools --help` | List the available commands with a short description. |
+
+`validate` is the only tool today; more will be added under the same
+`xftools <command>` interface as the toolkit grows.
+
+```bash
+$ xftools -v
+xftools 0.1.2
+Rule catalog: XF-CFAM-001:2026 (71 rules / 9 groups)
+Specification: https://xfcfam.org
+```
+
 ### Example output
 
 ```

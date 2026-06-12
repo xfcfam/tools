@@ -3,6 +3,7 @@ import { resolve } from 'node:path'
 import { R } from '../../../repository/R.js'
 import { B } from '../../../business/B.js'
 import { A } from '../../A.js'
+import { SpecUtils } from '../../utils/SpecUtils.js'
 
 /**
  * Interaction Layer Logical — CLI entry point.
@@ -27,6 +28,10 @@ export class CliService extends StatelessView {
 
   async run(argv: readonly string[]): Promise<number> {
     const [command, ...rest] = argv
+    if (command === '-v' || command === '--version') {
+      await this.printVersion()
+      return 0
+    }
     if (command === undefined || command === '-h' || command === '--help') {
       this.printUsage()
       return command === undefined ? 2 : 0
@@ -42,17 +47,30 @@ export class CliService extends StatelessView {
   }
 
   private printUsage(): void {
-    R.console.println('xftools — XF Architecture Model toolkit')
+    R.console.println('xftools — XF Architecture Model (CFAM) toolkit')
     R.console.println('')
     R.console.println('Usage:')
-    R.console.println('  xftools validate <path> [--json]')
+    R.console.println('  xftools <command> [options]')
+    R.console.println('  xftools [-v | -h]')
     R.console.println('')
-    R.console.println('Validates that the artefact at <path> follows the XF specification.')
-    R.console.println('Looks for <path>/src; errors if not found.')
+    R.console.println('Commands:')
+    R.console.println('  validate <path> [--json]   Validate that the XF artefact at <path>')
+    R.console.println('                             conforms to the model. Looks for <path>/src')
+    R.console.println('                             and reports a conformance level Λ ∈ {0..4}.')
+    R.console.println('                             Use --json for a structured report.')
     R.console.println('')
-    R.console.println('Flags:')
-    R.console.println('  --json    Emit the report as JSON to stdout.')
-    R.console.println('  -h, --help    Show this help.')
+    R.console.println('Options:')
+    R.console.println('  -v, --version   Print the xftools version and the rule-catalog edition.')
+    R.console.println('  -h, --help      Show this help.')
+    R.console.println('')
+    R.console.println('More tools will appear here as the toolkit grows.')
+  }
+
+  private async printVersion(): Promise<void> {
+    const version = await R.fileSystem.toolVersion()
+    R.console.println(`xftools ${version}`)
+    R.console.println(`Rule catalog: ${SpecUtils.edition} (${SpecUtils.ruleCount} rules / ${SpecUtils.groupCount} groups)`)
+    R.console.println(`Specification: ${SpecUtils.documentUrl}`)
   }
 
   private async runValidate(args: readonly string[]): Promise<number> {

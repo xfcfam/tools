@@ -1,5 +1,6 @@
 import { StatelessView } from '@xfcfam/xf'
 import { R } from '../../../repository/R.js'
+import { SpecUtils } from '../../utils/SpecUtils.js'
 import type { ConformanceReport } from '../../../business/transfers/ConformanceReport.js'
 import type { Violation, RuleScope } from '../../../business/transfers/Violation.js'
 
@@ -17,7 +18,7 @@ export class ConsoleReporterService extends StatelessView {
   render(report: ConformanceReport): void {
     R.console.println(HR)
     R.console.println(`XF Validation — ${report.artefactPath}`)
-    R.console.println(`Catalog: XF-CFAM-001:2026 — 71 rules / 9 groups`)
+    R.console.println(`Catalog: ${SpecUtils.edition} — ${SpecUtils.ruleCount} rules / ${SpecUtils.groupCount} groups`)
     R.console.println(HR)
     const ceiling = report.staticCeiling ? ' [static ceiling]' : ''
     R.console.println(`Conformance level:   Λ=${report.level}${ceiling}    (${ConsoleReporterService.describeLevel(report.level)})`)
