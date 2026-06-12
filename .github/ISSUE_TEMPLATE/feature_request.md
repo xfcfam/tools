@@ -11,7 +11,7 @@ labels: ['enhancement', 'needs-triage']
 
 ## XF spec backing
 
-<!-- Pointer to the section of XFA-RULES.md or xfa-es.tex that justifies this. If none exists, say so — it may be a spec gap. -->
+<!-- Pointer to the section of `xfa-es.tex` § 11.3 or `RULES.md` that justifies this. If none exists, say so — it may be a spec gap. -->
 
 ## Proposed API / detection
 

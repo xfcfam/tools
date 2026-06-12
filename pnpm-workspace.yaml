@@ -1,0 +1,12 @@
+allowBuilds:
+  esbuild: true
+
+minimumReleaseAgeExclude:
+  - '@xfcfam/xf@0.2.0'
+
+# Security overrides — force patched versions of vulnerable transitive
+# deps (mirrors xfcfam/lib-npm). Apply only to this workspace, not to
+# consumers of the published package.
+overrides:
+  vite: '>=6.4.2'
+  esbuild: '>=0.24.3'

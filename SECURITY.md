@@ -2,12 +2,12 @@
 
 ## Supported versions
 
-This repository publishes the `@xfarch/tools` (alias **xftools**) CLI
+This repository publishes the `@xfcfam/tools` (alias **xftools**) CLI
 to npm. Only the latest major version receives security fixes.
 
 | Package          | Supported version |
 | ---------------- | ----------------- |
-| `@xfarch/tools`  | latest major      |
+| `@xfcfam/tools`  | latest major      |
 
 ## Reporting a vulnerability
 
@@ -30,7 +30,7 @@ Use one of:
 
 1. **GitHub private vulnerability reporting** (preferred) — repository
    **Security** tab → **"Report a vulnerability"**.
-2. **Email** — `security@xfarch.org` (PGP key on request).
+2. **Email** — `security@xfcfam.org` (PGP key on request).
 
 Please include:
 
@@ -51,7 +51,7 @@ We aim to:
 
 In scope:
 
-- The published `@xfarch/tools` package and its CLI entrypoint.
+- The published `@xfcfam/tools` package and its CLI entrypoint.
 - The GitHub Actions workflows (`ci.yml`, `release.yml`).
 - The `changesets` configuration and release tooling.
 

@@ -1,4 +1,4 @@
-# CODEOWNERS — automatic PR reviewers for xfarch/tools (xftools CLI).
+# CODEOWNERS — automatic PR reviewers for xfcfam/tools (xftools CLI).
 #
 # Format: <path-glob>  <owner>...
 # Owners are auto-requested for review on every PR touching the path.
