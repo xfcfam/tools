@@ -46,3 +46,10 @@ jobs:
 
       - name: Test
         run: pnpm test
+
+      # Dogfood: tools is itself an XF artefact, so it must pass its own
+      # model. Validate with its OWN source (tsx) — not the published
+      # @latest — so a release certifies the code it is about to ship.
+      # `pnpm validate .` exits 1 when Λ < 3 (not well-formed).
+      - name: XF conformance gate (Λ ≥ 3 — self-validate)
+        run: pnpm validate .

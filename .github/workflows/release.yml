@@ -55,6 +55,12 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile
 
+      # Pre-publish dogfood: refuse to publish if tools is not well-formed
+      # (Λ < 3) against its OWN source. Runs before the publish step so a
+      # regression aborts the release instead of shipping to npm.
+      - name: XF conformance gate (Λ ≥ 3 — self-validate)
+        run: pnpm validate .
+
       - name: Upgrade npm for OIDC
         # Runners ship npm 10.x; trusted publishing needs npm >= 11.5.1.
         # `pnpm changeset publish` calls npm under the hood, so upgrade it.
