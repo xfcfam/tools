@@ -16,8 +16,8 @@ importers:
         specifier: ^0.2.0
         version: 0.2.0
       java-parser:
-        specifier: ^2.3.4
-        version: 2.3.4
+        specifier: ^3.0.1
+        version: 3.0.1
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -640,8 +640,8 @@ packages:
   isexe@2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
 
-  java-parser@2.3.4:
-    resolution: {integrity: sha512-5fnUDL2AUYX7gs6YlfyVmvq+bFL+HlSBE+MdPdUsfaE898KObdu9aafJCKTJIzXi2IF+P/RiCA5kvGc0msxhYA==}
+  java-parser@3.0.1:
+    resolution: {integrity: sha512-sDIR7u9b7O2JViNUxiZRhnRz7URII/eE7g2B+BmGxDeS6Ex3OYAcCyz5oh0H4LQ+hL/BS8OJTz8apMy9xtGmrQ==}
 
   js-yaml@3.14.2:
     resolution: {integrity: sha512-PMSmkqxr106Xa156c2M265Z+FTrPl+oxd/rgOQy2tijQeK5TxQ43psO1ZCwhVOSdnn+RzkzlRz/eY4BgJBYVpg==}
@@ -1648,7 +1648,7 @@ snapshots:
 
   isexe@2.0.0: {}
 
-  java-parser@2.3.4:
+  java-parser@3.0.1:
     dependencies:
       chevrotain: 11.0.3
       chevrotain-allstar: 0.3.1(chevrotain@11.0.3)

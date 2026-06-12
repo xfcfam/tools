@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@xfcfam/xf": "^0.2.0",
-    "java-parser": "^2.3.4",
+    "java-parser": "^3.0.1",
     "typescript": "^6.0.3"
   },
   "devDependencies": {
