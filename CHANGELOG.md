@@ -1,5 +1,12 @@
 # `@xfcfam/tools`
 
+## 0.1.1
+
+### Patch Changes
+
+- Bump `java-parser` to 3.0.1. Verified compatible — the Java CST parser's
+  17 tests pass against 3.x; the lazy-loaded parser path is unchanged.
+
 ## Unreleased — Catalog alignment with XF-CFAM-001:2026
 
 - Rule catalog rebuilt to match `xfa-en.tex § 11.3` **exactly**: 71
